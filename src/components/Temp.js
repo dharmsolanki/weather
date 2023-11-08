@@ -13,11 +13,11 @@ export default function Temp() {
       try {
         setLoading(true);
         setError(null);
-  
+
         const url = `https://api.weatherapi.com/v1/current.json?key=16b7a01ea69d4ac8bb160343230811&q=${searchText}&aqi=yes`;
         const response = await fetch(url);
         const data = await response.json();
-  
+
         if (response.ok) {
           setWeatherData(data);
           setClick(true); // Set click to true when data is fetched
@@ -65,7 +65,12 @@ export default function Temp() {
                   type="button"
                   // onClick={fetchWeatherData} // Call the function here
                 >
-                  <img src="images/search-icon.png" alt="Search" height="20px" width="20px" />
+                  <img
+                    src="images/search-icon.png"
+                    alt="Search"
+                    height="20px"
+                    width="20px"
+                  />
                 </button>
               </div>
             </div>
@@ -84,11 +89,37 @@ export default function Temp() {
                     </tr>
                     <tr>
                       <th>Temperature</th>
-                      <td>{weatherData.current.temp_c}°C</td>
+                      <td>
+                        <span className="mx-2">{weatherData.current.temp_c}°C</span>
+                      <img
+                            src="gif/temprature.gif"
+                            alt={weatherData.current.temp_c}
+                            height="30px"
+                            width="30px"
+                          />
+                      </td>
                     </tr>
                     <tr>
                       <th>Weather</th>
-                      <td>{weatherData.current.condition.text}</td>
+                      <td>
+                      <span className="mx-2">{weatherData.current.condition.text}</span>
+                        {weatherData.current.condition.text === "Overcast" && (
+                          <img
+                            src="gif/overcast.gif"
+                            alt={weatherData.current.condition.text}
+                            height="50px"
+                            width="50px"
+                          />
+                        )}
+                        {weatherData.current.condition.text === "Sunny" && (
+                          <img
+                            src="gif/sunny.gif"
+                            alt={weatherData.current.condition.text}
+                            height="50px"
+                            width="50px"
+                          />
+                        )}
+                      </td>
                     </tr>
                   </tbody>
                 </table>
